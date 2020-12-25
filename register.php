@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!$_SERVER["REQUEST_METHOD"] == "POST"){
 	header("Location: /setup.html");
 	exit();
@@ -53,6 +54,11 @@ if(!$result){
         exit();
 }
 mysqli_close($conn);
+
+# Session stuff
+
+$_SESSION['username'] = $username;
+
 header("Location: /setup.html?error=-1");
 exit();
 

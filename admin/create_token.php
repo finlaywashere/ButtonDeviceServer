@@ -12,15 +12,21 @@ $row = mysqli_fetch_assoc($result);
 $hash = $row["password"];
 if(!password_verify($_REQUEST['password'],$hash)){
 	mysqli_close($conn);
+	exit("Error 1");
+}
+$name = sanitize($conn,$_REQUEST['name']);
+if(!isset($name)){
+	mysqli_close($conn);
 	exit("Error 2");
 }
 $code = random_str();
-$sql = "INSERT INTO `registration` (`security_code`) VALUES (\"".$code."\");";
+$sql = "INSERT INTO `registration` (`security_code`, `name`) VALUES (\"".$code."\", \"".$name."\");";
 if(!mysqli_query($conn,$sql)){
 	echo $conn -> error;
 	mysqli_close($conn);
-	exit("Error 3");
+	exit("Error 2");
 }
+
 mysqli_close($conn);
 echo "Code is: ".$code;
 die();

@@ -18,6 +18,8 @@ if(!$result || $result -> num_rows < 1){
         mysqli_close($conn);
         exit();
 }
+$row = $result -> fetch_assoc();
+$name = $row['name'];
 
 $sql = "INSERT INTO `button_trigger`(`code`, `button`) VALUES (\"".$code."\",\"".$btn."\")";
 mysqli_query($conn,$sql);
@@ -27,7 +29,8 @@ $result = mysqli_query($conn,$sql);
 $row = $result -> fetch_assoc();
 $conf = preg_split("~,~",$row['configuration']);
 $index = ((int)$btn)-1;
-mail("finman292004@protonmail.com", "Button Press!", $conf[$index], "From: no-reply@finlaym.xyz");
+$split = preg_split("~@~",$conf[$index],2);
+mail(split[1], $name." pressed the button!", $split[0], "From: no-reply@finlaym.xyz");
 
 mysqli_close($conn);
 exit();
