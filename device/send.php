@@ -24,6 +24,13 @@ if(!$result || $result -> num_rows < 1){
 
 $sql = "INSERT INTO `button_trigger`(`code`, `button`) VALUES (\"".$code."\",\"".$btn."\")";
 mysqli_query($conn,$sql);
+
+$sql = "SELECT * FROM `hardware` WHERE `security_code`=\"".$code."\";";
+$result = mysqli_query($conn,$sql);
+$row = $result -> fetch_assoc();
+$conf = preg_split("\n",$row['configuration']);
+mail("finman292004@protonmail.com", "Button Press!", $conf[int(button)], "From: no-reply@finlaym.xyz");
+
 mysqli_close($conn);
 exit();
 function sanitize($conn,$str){
