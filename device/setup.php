@@ -1,10 +1,7 @@
 <?php
-if(!$_SERVER["REQUEST_METHOD"] == "POST"){
-        exit();
-}
-$code = $_POST['code'];
-$lan = $_POST['lan'];
-$version = $_POST['version'];
+$code = $_REQUEST['code'];
+$lan = $_REQUEST['lan'];
+$version = $_REQUEST['version'];
 if(empty($code) || empty($lan) || empty($version)){
 	error_log("Invalid request");
 	exit();
