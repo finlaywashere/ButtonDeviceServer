@@ -1,0 +1,33 @@
+<html>
+<body>
+<h1>Initial Setup</h1>
+<p>To set up the blessed button, first plug in a micro USB connector to the plug on the side of the blessed button and for the love of God do not put any force on the connector or it will snap in two and then you'll be sad and I'll be forced to fix it which I do not want to do, then connect to the WiFi network named "Setup Network" with a password of "password" and navigate to <a href="http://192.168.4.1">http://192.168.4.1</a><br>
+After you type in your SSID and WiFi password hit "Activate", wait about 1 minute, then fill out this form and hit submit</p>
+<h2 style="color: red; opacity: 0" id="error"></h2>
+<form action="register.php" method="post">
+<label>Code (on the back of the box): </label><input type="text" id="code" name="code"><br>
+<label>Username: </label><input type="text" id="username" name="username"><br>
+<label>Password: </label><input type="password" id="password" name="password"><br>
+<input type="submit" value="Submit">
+</form>
+<script>
+var urlParams = new URLSearchParams(window.location.search);
+if(urlParams.has("error")){
+	var error = urlParams.get("error");
+	var elem = document.getElementById("error");
+	if(error == -1){
+		elem.textContent = "Successfully registered device!";
+		elem.style.color = "green";
+	}else if(error == 0){
+        	elem.textContent = "Invalid code!";
+	}else if(error == 4){
+		elem.textContent = "Code already in use!";
+	}else{
+		elem.textContent = "Internal server error! Code "+error;
+	}
+	elem.style.opacity = 100;
+}
+</script>
+
+</body>
+</html>
