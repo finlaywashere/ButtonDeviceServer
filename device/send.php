@@ -1,9 +1,6 @@
 <?php
-if(!$_SERVER["REQUEST_METHOD"] == "POST"){
-        exit();
-}
-$code = $_POST['code'];
-$btn = $_POST['btn'];
+$code = $_REQUEST['code'];
+$btn = $_REQUEST['btn'];
 
 if(empty($code) || empty($btn)){
         exit();
