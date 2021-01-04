@@ -32,7 +32,7 @@ if($result -> num_rows < 1){
 }
 $row = $result -> fetch_row();
 // Idk why the other way doesn't work but idc
-if($row[2] != "1970-01-01"){
+if($row[2] != "1970-01-01" && $row[2] != "NULL"){
 	mysqli_close($conn);
         header("Location: /setup.html?error=4");
         exit();
